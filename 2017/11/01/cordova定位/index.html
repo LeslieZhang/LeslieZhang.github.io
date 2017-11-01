@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="js,cordova,WebApp," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="http://ouarxvmll.bkt.clouddn.com/image/jpg/bitbug_favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="利用cordova对WebApp进行定位，获取经纬度，再通过百度地图Api获取地理位置文字获取...">
+<meta name="keywords" content="js,cordova,WebApp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cordova获取地理位置">
+<meta property="og:url" content="http://LeslieZhang.github.io/2017/11/01/cordova定位/index.html">
+<meta property="og:site_name" content="哆啦A梦の口袋">
+<meta property="og:description" content="利用cordova对WebApp进行定位，获取经纬度，再通过百度地图Api获取地理位置文字获取...">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-11-01T06:15:02.556Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="cordova获取地理位置">
+<meta name="twitter:description" content="利用cordova对WebApp进行定位，获取经纬度，再通过百度地图Api获取地理位置文字获取...">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://LeslieZhang.github.io/2017/11/01/cordova定位/"/>
+
+
+
+
+
+  <title>cordova获取地理位置 | 哆啦A梦の口袋</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">哆啦A梦の口袋</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活不止眼前的苟且，还有javascript和远方...</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://LeslieZhang.github.io/2017/11/01/cordova定位/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="哆啦没有A梦">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ouarxvmll.bkt.clouddn.com/image/jpg/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="哆啦A梦の口袋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">cordova获取地理位置</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-01T13:53:46+08:00">
+                2017-11-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Cordova/" itemprop="url" rel="index">
+                    <span itemprop="name">Cordova</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  利用cordova对WebApp进行定位，获取经纬度，再通过百度地图Api获取地理位置文字获取...
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="第一步，引入插件"><a href="#第一步，引入插件" class="headerlink" title="第一步，引入插件"></a>第一步，引入插件</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cordova plugin add cordova-plugin-geolocation</div></pre></td></tr></table></figure>
+<h2 id="第二步，获取经纬度"><a href="#第二步，获取经纬度" class="headerlink" title="第二步，获取经纬度"></a>第二步，获取经纬度</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">document</span>.addEventListener(<span class="string">"deviceready"</span>,onDeviceReady,<span class="literal">false</span>);</div><div class="line"> </div><div class="line"><span class="comment">//Cordova加载完成会触发</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">onDeviceReady</span>(<span class="params"></span>) </span>&#123;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getCurrentPosition</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="comment">//定位数据获取成功响应</span></div><div class="line">    <span class="keyword">var</span> onSuccess = <span class="function"><span class="keyword">function</span>(<span class="params">position</span>) </span>&#123;</div><div class="line">        alert(<span class="string">'纬度: '</span>          + position.coords.latitude          + <span class="string">'\n'</span> +</div><div class="line">              <span class="string">'经度: '</span>         + position.coords.longitude         + <span class="string">'\n'</span> +</div><div class="line">              <span class="string">'海拔: '</span>          + position.coords.altitude          + <span class="string">'\n'</span> +</div><div class="line">              <span class="string">'水平精度: '</span>          + position.coords.accuracy          + <span class="string">'\n'</span> +</div><div class="line">              <span class="string">'垂直精度: '</span> + position.coords.altitudeAccuracy  + <span class="string">'\n'</span> +</div><div class="line">              <span class="string">'方向: '</span>           + position.coords.heading           + <span class="string">'\n'</span> +</div><div class="line">              <span class="string">'速度: '</span>             + position.coords.speed             + <span class="string">'\n'</span> +</div><div class="line">              <span class="string">'时间戳: '</span>         + position.timestamp                + <span class="string">'\n'</span>);</div><div class="line">　　　　　　　　　　&#125;;</div><div class="line">    <span class="comment">//定位数据获取失败响应</span></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">onError</span>(<span class="params">error</span>) </span>&#123;</div><div class="line">        alert(<span class="string">'code: '</span>    + error.code    + <span class="string">'\n'</span> +</div><div class="line">              <span class="string">'message: '</span> + error.message + <span class="string">'\n'</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//开始获取定位数据</span></div><div class="line">    navigator.geolocation.getCurrentPosition(onSuccess, onError);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这两步可以实现获取经纬度；<br>那么我们继续获取百度api实现地理位置文字获取；<br>我直接在上个hmlt添加好了</p>
+<h2 id="第三步，获取经纬度，实现文字转换"><a href="#第三步，获取经纬度，实现文字转换" class="headerlink" title="第三步，获取经纬度，实现文字转换"></a>第三步，获取经纬度，实现文字转换</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Capture Photo<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=utf-8"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span> <span class="attr">src</span>=<span class="string">"cordova.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!--这里是引入百度api的地方--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"http://api.map.baidu.com/api?v=2.0&amp;ak=5a21b9801cac081f6473bafdc558c53a"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="undefined"></span></div><div class="line"><span class="javascript">    <span class="built_in">document</span>.addEventListener(<span class="string">"deviceready"</span>,onDeviceReady,<span class="literal">false</span>);</span></div><div class="line"><span class="javascript">    <span class="comment">//Cordova加载完成会触发</span></span></div><div class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">onDeviceReady</span>(<span class="params"></span>) </span>&#123;</span></div><div class="line"><span class="undefined">    &#125;</span></div><div class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">getCurrentPosition</span>(<span class="params"></span>)</span>&#123;</span></div><div class="line"><span class="undefined"></span></div><div class="line"><span class="javascript">        <span class="comment">//定位数据获取成功响应</span></span></div><div class="line"><span class="javascript">        <span class="keyword">var</span> onSuccess = <span class="function"><span class="keyword">function</span>(<span class="params">position</span>) </span>&#123;</span></div><div class="line"><span class="javascript">            alert(<span class="string">'纬度: '</span>          + position.coords.latitude          + <span class="string">'\n'</span> +</span></div><div class="line"><span class="javascript">                  <span class="string">'经度: '</span>         + position.coords.longitude         + <span class="string">'\n'</span> +</span></div><div class="line"><span class="javascript">                  <span class="string">'海拔: '</span>          + position.coords.altitude          + <span class="string">'\n'</span> +</span></div><div class="line"><span class="javascript">                  <span class="string">'水平精度: '</span>          + position.coords.accuracy          + <span class="string">'\n'</span> +</span></div><div class="line"><span class="javascript">                  <span class="string">'垂直精度: '</span> + position.coords.altitudeAccuracy  + <span class="string">'\n'</span> +</span></div><div class="line"><span class="javascript">                  <span class="string">'方向: '</span>           + position.coords.heading           + <span class="string">'\n'</span> +</span></div><div class="line"><span class="javascript">                  <span class="string">'速度: '</span>             + position.coords.speed             + <span class="string">'\n'</span> +</span></div><div class="line"><span class="javascript">                  <span class="string">'时间戳: '</span>         + position.timestamp                + <span class="string">'\n'</span>);</span></div><div class="line"><span class="undefined"></span></div><div class="line"><span class="javascript">            <span class="comment">// 百度地图API功能</span></span></div><div class="line"><span class="javascript">            <span class="keyword">var</span> map = <span class="keyword">new</span> BMap.Map(<span class="string">"allmap"</span>);</span></div><div class="line"><span class="javascript">            alert(<span class="string">"测试--"</span>+map+<span class="string">"经度:"</span>+position.coords.latitude+<span class="string">"纬度"</span>+position.coords.longitude)</span></div><div class="line"><span class="javascript">            <span class="keyword">var</span> point = <span class="keyword">new</span> BMap.Point(position.coords.longitude,position.coords.latitude);<span class="comment">//纬度,经度</span></span></div><div class="line"><span class="javascript">            alert(<span class="string">"测试-point-"</span>)</span></div><div class="line"><span class="javascript">            <span class="keyword">var</span> gc = <span class="keyword">new</span> BMap.Geocoder();</span></div><div class="line"><span class="javascript">            alert(<span class="string">"测试-gc-"</span>)</span></div><div class="line"><span class="javascript">            <span class="keyword">var</span> pt = point;</span></div><div class="line"><span class="javascript">            gc.getLocation(pt, <span class="function"><span class="keyword">function</span>(<span class="params">rs</span>)</span>&#123;</span></div><div class="line"><span class="javascript">                <span class="keyword">var</span> addComp = rs.addressComponents;</span></div><div class="line"><span class="javascript">                  alert(<span class="string">"成功--"</span>)</span></div><div class="line"><span class="javascript">                alert(addComp.province + <span class="string">", "</span> + addComp.city + <span class="string">", "</span> + addComp.district + <span class="string">", "</span> + addComp.street + <span class="string">", "</span> +</span></div><div class="line"><span class="undefined">                addComp.streetNumber);</span></div><div class="line"><span class="undefined">            &#125;);</span></div><div class="line"><span class="undefined">        &#125;;</span></div><div class="line"><span class="javascript">　　　　　　　　　　<span class="comment">///////////////////////////////////////百度api结束///////////</span></span></div><div class="line"><span class="javascript">        <span class="comment">//定位数据获取失败响应</span></span></div><div class="line"><span class="javascript">        <span class="function"><span class="keyword">function</span> <span class="title">onError</span>(<span class="params">error</span>) </span>&#123;</span></div><div class="line"><span class="javascript">            alert(<span class="string">'code: '</span>    + error.code    + <span class="string">'\n'</span> +</span></div><div class="line"><span class="javascript">                  <span class="string">'message: '</span> + error.message + <span class="string">'\n'</span>);</span></div><div class="line"><span class="undefined">        &#125;</span></div><div class="line"><span class="undefined"></span></div><div class="line"><span class="javascript">        <span class="comment">//开始获取定位数据</span></span></div><div class="line"><span class="undefined">        navigator.geolocation.getCurrentPosition(onSuccess, onError);</span></div><div class="line"><span class="undefined"></span></div><div class="line"><span class="undefined">    &#125;</span></div><div class="line"><span class="undefined"></span></div><div class="line"><span class="undefined">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">style</span>=<span class="string">"padding-top:50px"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">style</span>=<span class="string">"font-size:23px;"</span> <span class="attr">onclick</span>=<span class="string">"getCurrentPosition();"</span>&gt;</span>获取位置信息<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="备注：Vue写法"><a href="#备注：Vue写法" class="headerlink" title="备注：Vue写法"></a>备注：Vue写法</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">created()&#123;</div><div class="line">    <span class="keyword">this</span>.getCurrentPosition();</div><div class="line">  &#125;,</div><div class="line">  methods:&#123;</div><div class="line">           </div><div class="line">    <span class="comment">//Cordova加载完成会触发</span></div><div class="line">    onDeviceReady() &#123;</div><div class="line">       <span class="built_in">document</span>.addEventListener(<span class="string">"deviceready"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;,<span class="literal">false</span>);</div><div class="line"></div><div class="line">    &#125;,</div><div class="line">    getCurrentPosition()&#123;</div><div class="line">        <span class="keyword">let</span> _this=<span class="keyword">this</span>;</div><div class="line">        <span class="comment">//定位数据获取成功响应</span></div><div class="line">        <span class="keyword">var</span> onSuccess = <span class="function"><span class="keyword">function</span>(<span class="params">position</span>) </span>&#123;</div><div class="line">            <span class="comment">// 百度地图API功能</span></div><div class="line">            <span class="keyword">var</span> map = <span class="keyword">new</span> BMap.Map(<span class="string">"allmap"</span>);</div><div class="line">            <span class="comment">//alert("测试--"+map+"经度:"+position.coords.latitude+"纬度"+position.coords.longitude)</span></div><div class="line">            <span class="keyword">var</span> point = <span class="keyword">new</span> BMap.Point(position.coords.longitude,position.coords.latitude);<span class="comment">//纬度,经度</span></div><div class="line">            <span class="keyword">var</span> gc = <span class="keyword">new</span> BMap.Geocoder();</div><div class="line">            <span class="keyword">var</span> pt = point;</div><div class="line">            gc.getLocation(pt, <span class="function"><span class="keyword">function</span>(<span class="params">rs</span>)</span>&#123;</div><div class="line">                <span class="keyword">var</span> addComp = rs.addressComponents;</div><div class="line">                <span class="comment">// alert(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " +</span></div><div class="line">                <span class="comment">// addComp.streetNumber);</span></div><div class="line">                <span class="built_in">console</span>.log(addComp.city)</div><div class="line">                _this.city=addComp.city;<span class="comment">//获取市</span></div><div class="line">                _this.empSelectStore();<span class="comment">//根据定位信息（市）选择店铺页面</span></div><div class="line">            &#125;);</div><div class="line">        &#125;;</div><div class="line">　　　　　　　　　　<span class="comment">///////////////////////////////////////百度api结束///////////</span></div><div class="line">        <span class="comment">//定位数据获取失败响应</span></div><div class="line">        <span class="function"><span class="keyword">function</span> <span class="title">onError</span>(<span class="params">error</span>) </span>&#123;</div><div class="line">            <span class="comment">// alert('code: '    + error.code    + '\n' +</span></div><div class="line">            <span class="comment">//       'message: ' + error.message + '\n');</span></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">//开始获取定位数据</span></div><div class="line">        navigator.geolocation.getCurrentPosition(onSuccess, onError);</div><div class="line"></div><div class="line">    &#125;,</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/js/" rel="tag"># js</a>
+          
+            <a href="/tags/cordova/" rel="tag"># cordova</a>
+          
+            <a href="/tags/WebApp/" rel="tag"># WebApp</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/03/vue-cli/" rel="next" title="vue-cli">
+                <i class="fa fa-chevron-left"></i> vue-cli
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ouarxvmll.bkt.clouddn.com/image/jpg/head.jpg"
+               alt="哆啦没有A梦" />
+          <p class="site-author-name" itemprop="name">哆啦没有A梦</p>
+           
+              <p class="site-description motion-element" itemprop="description">专注分享与代码、音乐有关的一切Bug、干货、观点、搞怪、故事，包括所有光怪陆离的梦。愿你了解这世界的黑与白仍以温柔相待</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一步，引入插件"><span class="nav-number">1.</span> <span class="nav-text">第一步，引入插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二步，获取经纬度"><span class="nav-number">2.</span> <span class="nav-text">第二步，获取经纬度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三步，获取经纬度，实现文字转换"><span class="nav-number">3.</span> <span class="nav-text">第三步，获取经纬度，实现文字转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#备注：Vue写法"><span class="nav-number">4.</span> <span class="nav-text">备注：Vue写法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">哆啦没有A梦</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
