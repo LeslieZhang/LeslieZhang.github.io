@@ -76,7 +76,7 @@
 <meta property="og:site_name" content="哆啦A梦の口袋">
 <meta property="og:description" content="使用Cordova进行跨平台应用开发时，发现在iOS平台下，如果页面处于最顶端时，用户用手指往下拖动（向下拖动），会露出灰色空背景。同样页面在最底部的时候，继续向上拖动，下方也会露出空背景...">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-02T03:41:25.942Z">
+<meta property="og:updated_time" content="2017-11-02T03:44:40.182Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cordova ios 上下拖动黑边">
 <meta name="twitter:description" content="使用Cordova进行跨平台应用开发时，发现在iOS平台下，如果页面处于最顶端时，用户用手指往下拖动（向下拖动），会露出灰色空背景。同样页面在最底部的时候，继续向上拖动，下方也会露出空背景...">
@@ -352,7 +352,7 @@
       
         <p>cordova生成的项目，拖动底部或顶部时会出现空白，松手后再弹回，这使得项目与原生应用不同。查了后，发现这是页面<strong><em>Bounce回弹现象</em></strong>，如果要禁止此弹回效果，可用如下两种方法解决：</p>
 <h2 id="第一种，修改config-xml-文件，加入如下配置："><a href="#第一种，修改config-xml-文件，加入如下配置：" class="headerlink" title="第一种，修改config.xml 文件，加入如下配置："></a>第一种，修改config.xml 文件，加入如下配置：</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">preference</span> <span class="attr">name</span>=<span class="string">"WebViewBounce"</span> <span class="attr">value</span>=<span class="string">"false"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">preference</span> <span class="attr">name</span>=<span class="string">"DisallowOverscroll"</span> <span class="attr">value</span>=<span class="string">"true"</span> /&gt;</span> //这里是true，很重要。</div><div class="line"><span class="tag">&lt;<span class="name">preference</span> <span class="attr">name</span>=<span class="string">"UIWebViewBounce"</span> <span class="attr">value</span>=<span class="string">"false"</span> /&gt;</span></div></pre></td></tr></table></figure>
-<h2 id="第二种，直接对原生代码入手："><a href="#第二种，直接对原生代码入手：" class="headerlink" title="第二种，直接对原生代码入手："></a>第二种，直接对原生代码入手：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">- (void)webViewDidFinishLoad:(UIWebView*)theWebView</div><div class="line">&#123;</div><div class="line">    [(UIScrollView *)[[theWebView subviews] objectAtIndex:0] setBounces:NO];</div><div class="line">    return [superwebViewDidFinishLoad:theWebView];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="第二种，直接对原生代码入手："><a href="#第二种，直接对原生代码入手：" class="headerlink" title="第二种，直接对原生代码入手："></a>第二种，直接对原生代码入手：</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)webViewDidFinishLoad:(UIWebView*)theWebView</div><div class="line">&#123;</div><div class="line">    [(UIScrollView *)[[theWebView subviews] objectAtIndex:<span class="number">0</span>] setBounces:NO];</div><div class="line">    <span class="keyword">return</span> [superwebViewDidFinishLoad:theWebView];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>cordova为我们默认初始化了一个UIWebView，然后通过这个视图中显示我们所编写的前端页面。<br>(使用的是第一种，第二种没用，不知道效果咋样<em>-</em>)</p>
 
       
@@ -397,6 +397,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/02/微信网页ios input/" rel="prev" title="关于移动端input框 在微信网页内ios无法输入文字的问题">
+                关于移动端input框 在微信网页内ios无法输入文字的问题 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -473,7 +477,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -495,7 +499,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
